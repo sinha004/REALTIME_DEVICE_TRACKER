@@ -7,8 +7,16 @@ const socketio = require("socket.io");
 const server = http.createServer(app);
 const io = socketio(server);
 
+
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
+
+app.use((req, res, next) => {
+  if (process.env.MAINTENANCE_MODE === "true") {
+    return res.send("<h1>🚧 Site Under Maintenance</h1>");
+  }
+  next();
+});
 
 io.on("connection", function (socket) {
   socket.on("send-location", function (data) {
