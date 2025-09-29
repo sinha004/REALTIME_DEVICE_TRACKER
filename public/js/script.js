@@ -25,7 +25,7 @@ if (navigator.geolocation) {
         myMarker.setLatLng([latitude, longitude]);
       } else {
         myMarker = L.marker([latitude, longitude], { title: "Me" }).addTo(map);
-        map.setView([latitude, longitude], 15); // center once when first location is found
+        map.setView([latitude, longitude], 10); // center once when first location is found
       }
     },
     (error) => {
